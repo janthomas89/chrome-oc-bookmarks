@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owncloud Bookmarks</title>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bookmarks.css">
+
+    <script src="vendor/jquery-1.11.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="core.js"></script>
+    <script src="bookmarks.js"></script>
+</head>
+<body>
+    <div id="towrite"></div>
+
+    <div class="container">
+        <h4>
+            <span class="glyphicon glyphicon-bookmark"></span>
+            Owncloud Bookmarks
+        </h4>
+        <div class="row">
+            <div class="col-xs-5 sidebar">
+                <ul class="nav nav-sidebar" id="list-tags" />
+            </div>
+            <div class="col-xs-7 bookmark-container">
+                <ul class="list-unstyled" id="list-items" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
