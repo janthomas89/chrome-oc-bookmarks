@@ -46,7 +46,7 @@
         }
     };
 
-    var loadData = function(callback) {
+    var loadData = function(callback, failOnInvalidToken) {
         requireToken(function(token) {
             var path = 'index.php/apps/bookmarks/bookmark/export?requesttoken=';
             var url = OCBookmarksSettings.get('url') + path + token;
@@ -79,9 +79,14 @@
 
                 OCBookmarksSettings.setObject('cached_data', data);
                 callback && callback(data);
-            }).fail(function() {
+            }).fail(function(resp) {
                 OCBookmarksSettings.set('token', null);
-                alert('Error while requesting the owncloud bookmarks. Please check your settings!');
+
+                if (resp.status == 412 && !failOnInvalidToken) { // Invalid CSRF Token
+                    loadData(callback, true);
+                } else {
+                    alert('Error while requesting the owncloud bookmarks. Please check your settings!');
+                }
             });
         });
     };
