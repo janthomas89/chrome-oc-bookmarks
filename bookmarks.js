@@ -2,6 +2,8 @@
     $(function() {
         var $tags = $('#list-tags');
         var $items = $('#list-items');
+        var $add = $('#add');
+        var $iframe = $('#iframe').hide();
 
         $tags.on('click', 'li', function() {
             var $elm = $(this);
@@ -33,7 +35,20 @@
             $tags.find('li').first().trigger('click');
         });
 
+        $add.click(function(e) {
+            e.preventDefault();
+            OCBookmarks.getAddURL(function(url) {
+                var dialog = window.open(
+                    url,
+                    'OCBookmarksPopup',
+                    'top=' + ((window.screenY || window.screenTop) + 15) + ',left=' + ((window.screenX || window.screenLeft) + 0) + ',height=360px,width=560px,resizable=0,alwaysRaised=1');
 
+                window.setTimeout(function(){dialog.focus()}, 0);
+                window.close();
+
+
+            });
+        });
     });
 
     var getFavIconURL = function(url) {

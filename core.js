@@ -43,6 +43,14 @@
             });
 
             callback && callback(bookmarks);
+        },
+        getAddURL: function(callback) {
+            chrome.tabs.getSelected(null, function(tab) {
+                var url = OCBookmarksSettings.get('url');
+                url += 'index.php/apps/bookmarks/bookmarklet?output=popup&url=';
+                url += encodeURIComponent(tab.url) + '&title=' + encodeURIComponent(tab.title);
+                callback(url);
+            });
         }
     };
 
