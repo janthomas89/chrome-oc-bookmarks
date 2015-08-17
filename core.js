@@ -1,4 +1,7 @@
 (function(scope, $) {
+    var online = false;
+    var onStatusChange = $.noop();
+
     var OCBookmarksSettings = scope.OCBookmarksSettings = {
         get: function(key) {
             return localStorage['ocb_' + key];
@@ -33,6 +36,9 @@
             }
 
             loadData(function(data) {
+                var date = new Date(OCBookmarksSettings.get('last_sync'));
+                onStatusChange(date, online);
+
                 !cachedData && callback && callback(data.tags);
             });
         },
@@ -51,6 +57,9 @@
                 url += encodeURIComponent(tab.url) + '&title=' + encodeURIComponent(tab.title);
                 callback(url);
             });
+        },
+        onStatusChange: function(callback) {
+            onStatusChange = callback;
         }
     };
 
@@ -86,12 +95,19 @@
                 };
 
                 OCBookmarksSettings.setObject('cached_data', data);
+                OCBookmarksSettings.set('last_sync', new Date());
+                online = true;
+
                 callback && callback(data);
             }).fail(function(resp) {
                 OCBookmarksSettings.set('token', null);
 
                 if (resp.status == 412 && !failOnInvalidToken) { // Invalid CSRF Token
                     loadData(callback, true);
+                } else if (resp.status == 401) {
+                    online = false;
+                    var date = new Date(OCBookmarksSettings.get('last_sync'));
+                    onStatusChange(date, online);
                 } else {
                     alert('Error while requesting the owncloud bookmarks. Please check your settings!');
                 }

@@ -11,16 +11,25 @@
     <script src="bookmarks.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h3>
-            <span class="glyphicon glyphicon-bookmark"></span>
-            Owncloud Bookmarks
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="navbar-brand">
+                    <span class="glyphicon glyphicon-bookmark"></span>
+                    Owncloud Bookmarks <br />
 
-            <button id="add" type="button" class="btn btn-primary btn-sm pull-right">
-                <span class="glyphicon glyphicon-plus"></span>
-                Add Bookmark
-            </button>
-        </h3>
+                    <span id="stats" class="text-muted" style="font-size: 75%;">loading ...</span>
+                </span>
+
+                <button id="add" type="button" class="btn btn-primary btn-sm navbar-btn pull-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add Bookmark
+                </button>                
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
         <div class="row">
             <div class="col-xs-5 sidebar">
                 <ul class="nav nav-sidebar" id="list-tags" />

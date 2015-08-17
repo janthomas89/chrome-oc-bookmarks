@@ -3,7 +3,7 @@
         var $tags = $('#list-tags');
         var $items = $('#list-items');
         var $add = $('#add');
-        var $iframe = $('#iframe').hide();
+        var $stats = $('#stats');
 
         $tags.on('click', 'li', function() {
             var $elm = $(this);
@@ -16,6 +16,7 @@
                     var $favicon = $('<img>').attr('src', getFavIconURL(bookmarks.url));
                     var $a = $('<a target="_blank">')
                         .attr('href', bookmarks.url)
+                        .attr('title', bookmarks.url)
                         .text(bookmarks.text)
                         .prepend($favicon);
                     var $li = $('<li>').append($a);
@@ -48,6 +49,14 @@
 
 
             });
+        });
+
+        OCBookmarks.onStatusChange(function(date, online) {
+            var text = 'last sync: ';
+            text += date ? date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' +  date.getHours() + ':' + date.getMinutes() : ' n/a ';
+            text += ', ';
+            text += !!online ? 'online' : 'offline';
+            $stats.text(text);
         });
     });
 

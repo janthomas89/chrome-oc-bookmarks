@@ -1,10 +1,22 @@
 body {
     background-color: #f0f0f0;
+    padding-top: 50px;
 }
 
-h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.navbar-header {
+    background-color: #ddd;
+    border-bottom: 2px solid #ccc;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+    color: #333;
+    padding-top: 5px;
+}
+
+#add {
+    margin-right: 10px;
 }
 
 .container {
@@ -14,6 +26,7 @@ h3 {
 .bookmark-container {
     overflow: auto;
     height: 540px;
+    padding: 0px;
 }
 
 .row {
@@ -31,6 +44,7 @@ h3 {
     padding-left: 0px;
     overflow: auto;
     height: 540px;
+    border-right: 2px solid #ccc;
 }
 
 .nav-sidebar > .active > a,
