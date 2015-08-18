@@ -55,8 +55,14 @@
             var text = 'last sync: ';
             text += date ? date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' +  date.getHours() + ':' + date.getMinutes() : ' n/a ';
             text += ', ';
-            text += !!online ? 'online' : 'offline';
             $stats.text(text);
+
+            if (online) {
+                $stats.append('online');
+            } else {
+                var loginURL = OCBookmarksSettings.get('url');
+                $stats.append('<a href="' + loginURL + '" target="_blank">offline</a>');
+            }
         });
     });
 
