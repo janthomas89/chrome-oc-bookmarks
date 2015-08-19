@@ -53,7 +53,7 @@
 
         OCBookmarks.onStatusChange(function(date, online) {
             var text = 'last sync: ';
-            text += date ? date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' +  date.getHours() + ':' + date.getMinutes() : ' n/a ';
+            text += date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' +  date.getHours() + ':' + date.getMinutes() : ' n/a ';
             text += ', ';
             $stats.text(text);
 
