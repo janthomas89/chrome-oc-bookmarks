@@ -66,9 +66,7 @@
     var loadData = function(callback, failOnInvalidToken) {
         requireToken(function(token) {
             var path = 'index.php/apps/bookmarks/bookmark/export?requesttoken=';
-            var url = OCBookmarksSettings.get('url') + path + token;
-
-            console.log(token, url);
+            var url = OCBookmarksSettings.get('url') + path + encodeURIComponent(token);
 
             $.get(url).done(function(html) {
                 var tags = {};
